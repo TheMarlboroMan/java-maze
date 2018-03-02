@@ -18,19 +18,16 @@ public class Coords {
 		y=_y;
 	}
 
-	public Coords get_neighbour(int _dir) throws Exception {
+	public Coords get_neighbour(Tools.DirFlag _dir) throws Exception {
 		Coords res=new Coords(this);
 		res.move(_dir);
 		return res;
 	}
 
-	public void move(int _dir) throws Exception {
-		switch(_dir) {
-			case Tools.up: 		--y; break;
-			case Tools.right:	++x; break;
-			case Tools.down:	++y; break;
-			case Tools.left:	--x; break;
-			default: throw new Exception("Unknown exit type "+_dir);
-		}
+	public void move(Tools.DirFlag _dir) {
+		if(_dir==Tools.DirFlag.up)	{--y;}
+		if(_dir==Tools.DirFlag.right) 	{++x;}
+		if(_dir==Tools.DirFlag.down)	{++y;}
+		if(_dir==Tools.DirFlag.left)	{--x;}
 	}
 }

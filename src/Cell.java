@@ -1,39 +1,43 @@
+import java.util.EnumSet;
+
 public class Cell {
 
-	private int exits;
-	private int limits;
+	private EnumSet<Tools.DirFlag> exits=EnumSet.noneOf(Tools.DirFlag.class);
+	private EnumSet<Tools.DirFlag> limits=EnumSet.noneOf(Tools.DirFlag.class);
 
-	public Cell(int _l) {
-		exits=Tools.none;
+	public Cell(EnumSet<Tools.DirFlag> _l) {
 		limits=_l;
 	}
 
-	public int get_exits() {
+	public EnumSet<Tools.DirFlag> get_exits() {
 		return exits;
 	}
 
-	public int get_limits() {
+	public EnumSet<Tools.DirFlag> get_limits() {
 		return limits;
 	}
 
-	public void carve(int _pos) {
-		exits|=_pos;
+	public void carve(Tools.DirFlag _pos) {
+		exits.add(_pos);
 	}
 
-	public boolean is_limit(int _pos) {
-		return (limits & _pos)!=0;
+	public boolean is_limit(Tools.DirFlag _pos) {
+		return limits.contains(_pos);
 	}
 
-	public boolean is_open(int _pos) {
-		return (exits & _pos)!=0;
+	public boolean is_open(Tools.DirFlag _pos) {
+		return exits.contains(_pos);
 	}
 
-	public int get_blocked_directions(){
-		int res=exits^(Tools.up|Tools.right|Tools.down|Tools.left);
-		return res|limits;
+	public EnumSet<Tools.DirFlag> get_blocked_directions(){
+		EnumSet<Tools.DirFlag> res=EnumSet.complementOf(exits);
+		res.addAll(limits);
+		return res;
 	}
 
-	public int get_free_directions() throws Exception{
-		return exits & (~limits);
+	public EnumSet<Tools.DirFlag> get_free_directions() throws Exception {
+		EnumSet<Tools.DirFlag> res=EnumSet.copyOf(exits);
+		res.removeAll(limits);
+		return res;
 	}
 }

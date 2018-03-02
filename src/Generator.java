@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class Generator {
 
@@ -14,14 +15,12 @@ public class Generator {
 	public void generate(Maze _maze) throws Exception {
 		//Choose first cell...
 		Coords coords=new Coords(0,0);
-		int direction=Tools.none;
-
 		stack.add(new Coords(coords));
 		visited.add(calculate_coords_hash(coords, _maze));
 
-		do{
-			direction=choose_random_direction(coords, _maze);
-			if(Tools.none==direction) {
+		do{			
+			Tools.DirFlag direction=choose_random_direction(coords, _maze);
+			if(null==direction) {
 				coords=new Coords(stack.remove(stack.size()-1));
 			}
 			else { 
@@ -33,20 +32,19 @@ public class Generator {
 		}while(stack.size()!=0);
 	}
 
-	private int choose_random_direction(Coords _coords, Maze _maze) throws Exception {
+	private Tools.DirFlag choose_random_direction(Coords _coords, Maze _maze) throws Exception {
 
-		int directions=_maze.get_cell(_coords).get_blocked_directions();
-		while(directions!=Tools.none) {
-			
-			int res=Tools.get_random_direction_from(directions);
-			directions&=~res;
+		EnumSet<Tools.DirFlag> directions=_maze.get_cell(_coords).get_blocked_directions();
+		while(!directions.isEmpty()) {
+			Tools.DirFlag res=Tools.get_random_direction_from(directions);
+			directions.remove(res);
 			if(!check_free_direction(_coords, _maze, res)) continue;
 			return res;
 		}
-		return Tools.none;
+		return null;
 	}
 
-	private boolean check_free_direction(Coords _coords, Maze _maze, int _dir) throws Exception {
+	private boolean check_free_direction(Coords _coords, Maze _maze, Tools.DirFlag _dir) throws Exception {
 		Cell cell=_maze.get_cell(_coords);
 		if(cell.is_open(_dir)) {
 			return false;	//If open, we already visited.

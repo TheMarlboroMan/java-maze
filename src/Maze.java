@@ -1,3 +1,5 @@
+import java.util.EnumSet;
+
 public class Maze {
 
 	private int		width;
@@ -23,7 +25,7 @@ public class Maze {
 		return cells[_c.x][_c.y];
 	}
 
-	public void carve_exit(Coords _c, int _dir) throws Exception {
+	public void carve_exit(Coords _c, Tools.DirFlag _dir) throws Exception {
 		this.get_cell(_c.get_neighbour(_dir)).carve(Tools.opposite_direction(_dir));
 		this.get_cell(_c).carve(_dir);
 	}
@@ -32,11 +34,11 @@ public class Maze {
 		for(int x=0; x<width; x++) {
 			for(int y=0; y<height; y++) {
 
-				int limits=Tools.none;
-				if(0==x) limits|=Tools.left;		//No else, in case we want a 1x1 maze XD.
-				if(x==this.width-1) limits|=Tools.right;
-				if(0==y) limits|=Tools.up;
-				if(y==this.height-1) limits|=Tools.down;
+				EnumSet<Tools.DirFlag> limits=EnumSet.noneOf(Tools.DirFlag.class);
+				if(0==x) 		limits.add(Tools.DirFlag.left);		//No else, in case we want a 1x1 maze XD.
+				if(x==this.width-1) 	limits.add(Tools.DirFlag.right);
+				if(0==y) 		limits.add(Tools.DirFlag.up);
+				if(y==this.height-1) 	limits.add(Tools.DirFlag.down);
 
 				cells[x][y]=new Cell(limits);
 			}

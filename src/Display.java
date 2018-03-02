@@ -1,29 +1,32 @@
+import java.util.EnumSet;
+
 public class Display {
 
 	public Display() {
 
 	}
 
-	public char from_direction(int _dir) throws Exception {
-		switch(_dir) {
-			case Tools.none:	return '.';
-			case Tools.up:		return get(244);
-			case Tools.right:	return get(168);
-			case Tools.down:	return get(243);
-			case Tools.left:	return get(169);
-			case Tools.up|Tools.right:	return get(191);
-			case Tools.up|Tools.down:	return get(178);
-			case Tools.up|Tools.left:	return get(216);
-			case Tools.right|Tools.down:	return get(217);
-			case Tools.right|Tools.left:	return get(195);
-			case Tools.down|Tools.left:	return get(190);
-			case Tools.up|Tools.right|Tools.down:	return get(194);
-			case Tools.up|Tools.right|Tools.left:	return get(192);
-			case Tools.up|Tools.down|Tools.left:	return get(179);
-			case Tools.right|Tools.down|Tools.left:	return get(193);
-			case Tools.up|Tools.right|Tools.down|Tools.left:	return get(196);
-			default: throw new Exception("Unknown exits value for "+_dir);
-		}
+	public char from_direction(EnumSet<Tools.DirFlag> _dir) throws Exception {
+		
+		if(_dir.isEmpty())	return '.';
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up)))	return get(244);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.right)))	return get(168);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.down)))	return get(243);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.left)))	return get(169);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.right)))	return get(191);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.down)))	return get(178);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.left)))	return get(216);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.right, Tools.DirFlag.down)))	return get(217);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.right, Tools.DirFlag.left)))	return get(195);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.down, Tools.DirFlag.left)))	return get(190);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.right, Tools.DirFlag.down)))	return get(194);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.right, Tools.DirFlag.left)))	return get(192);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.down, Tools.DirFlag.left)))	return get(179);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.right, Tools.DirFlag.down, Tools.DirFlag.left)))	return get(193);
+		if(_dir.equals(EnumSet.of(Tools.DirFlag.up, Tools.DirFlag.right, Tools.DirFlag.down, Tools.DirFlag.left)))	return get(196);
+//		if(_dir.containsAll(EnumSet.allOf(Tools.DirFlag)))	return get(196);
+
+		throw new Exception("Unknown dir value");
 	}
 
 	private char from_cell(Cell _c) throws Exception {
