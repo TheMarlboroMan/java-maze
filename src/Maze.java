@@ -39,7 +39,6 @@ public class Maze {
 				if(x==this.width-1) 	limits.add(Tools.DirFlag.right);
 				if(0==y) 		limits.add(Tools.DirFlag.up);
 				if(y==this.height-1) 	limits.add(Tools.DirFlag.down);
-
 				cells[x][y]=new Cell(limits);
 			}
 		}

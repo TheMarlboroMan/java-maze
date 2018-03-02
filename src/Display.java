@@ -2,12 +2,15 @@ import java.util.EnumSet;
 
 public class Display {
 
+	
+
 	public Display() {
 
 	}
 
 	public char from_direction(EnumSet<Tools.DirFlag> _dir) throws Exception {
-		
+
+		//TODO:Perhaps this shit is slow...
 		if(_dir.isEmpty())	return '.';
 		if(_dir.equals(EnumSet.of(Tools.DirFlag.up)))	return get(244);
 		if(_dir.equals(EnumSet.of(Tools.DirFlag.right)))	return get(168);
