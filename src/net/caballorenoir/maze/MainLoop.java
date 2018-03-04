@@ -9,7 +9,7 @@ class MainLoop {
 	private static final String EXIT="exit";
 
 	public void run() {
-
+		//Perhaps I could use the Console, instead of an scanner.
 		Scanner s=null;
 		try {
 			s=new Scanner(System.in);
@@ -21,39 +21,26 @@ class MainLoop {
 		}
 
 		while(true) {
-			Scanner ls=null;
-			try {
-				System.out.printf(">>>width height [file|console] (blank to finish)%n");
-				String line=s.nextLine();
-				ls=new Scanner(line);
-				
-				if(line.length()==0) {
-					System.out.println("Exiting...");
-					break;
-				}
+			System.out.printf(">>>width height [file|console] (blank to finish)%n");
+			String line=s.nextLine();
+			if(line.length()==0) {
+				System.out.println("Exiting...");
+				break;
+			}
 
+			try(Scanner ls=new Scanner(line)) {
 				Maze maze=new Maze(ls.nextInt(), ls.nextInt());
 				Generator gen=new Generator();
 				gen.generate(maze);
 				Display display=get_display(ls.next());
 				display.draw(maze);
-
 			}
 			catch(Exception e) {
 				System.out.println("Something went wrong, probably your fault: "+e.getMessage());
 				e.printStackTrace();
-//				s.nextLine(); //Discard the input!.
-			}
-			finally {
-				if(null!=ls) {
-					ls.close();
-				}
 			}
 		}
-
-		if(null!=s) {
-			s.close();
-		}
+		s.close();
 	}
 
 	private Display get_display(String type) throws Exception {

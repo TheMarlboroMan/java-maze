@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: Me.
+Main-Class: net.caballorenoir.maze.main
+Class-path: ./lib/
+
