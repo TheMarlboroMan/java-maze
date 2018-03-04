@@ -5,7 +5,6 @@ import java.util.EnumSet;
 
 public class Generator {
 
-	//Fuck you fuck you fuck you fuck you fuck you fuck you ... Integer.
 	private ArrayList<Integer> 	visited;
 	private ArrayList<Coords>	stack;
 
@@ -14,7 +13,7 @@ public class Generator {
 		stack=new ArrayList<Coords>();
 	}
 
-	public void generate(Maze _maze) throws Exception {
+	public void generate(Maze _maze) {
 		//Choose first cell...
 		Coords coords=new Coords(0,0);
 		stack.add(new Coords(coords));
@@ -34,7 +33,7 @@ public class Generator {
 		}while(stack.size()!=0);
 	}
 
-	private Tools.DirFlag choose_random_direction(Coords _coords, Maze _maze) throws Exception {
+	private Tools.DirFlag choose_random_direction(Coords _coords, Maze _maze) {
 
 		EnumSet<Tools.DirFlag> directions=_maze.get_cell(_coords).get_blocked_directions();
 		while(!directions.isEmpty()) {
@@ -46,7 +45,7 @@ public class Generator {
 		return null;
 	}
 
-	private boolean check_free_direction(Coords _coords, Maze _maze, Tools.DirFlag _dir) throws Exception {
+	private boolean check_free_direction(Coords _coords, Maze _maze, Tools.DirFlag _dir) {
 		Cell cell=_maze.get_cell(_coords);
 		if(cell.is_open(_dir)) {
 			return false;	//If open, we already visited.

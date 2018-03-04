@@ -11,14 +11,6 @@ public class Cell {
 		limits=_l;
 	}
 
-	public EnumSet<Tools.DirFlag> get_exits() {
-		return exits;
-	}
-
-	public EnumSet<Tools.DirFlag> get_limits() {
-		return limits;
-	}
-
 	public void carve(Tools.DirFlag _pos) {
 		exits.add(_pos);
 	}
@@ -37,7 +29,7 @@ public class Cell {
 		return res;
 	}
 
-	public EnumSet<Tools.DirFlag> get_free_directions() throws Exception {
+	public EnumSet<Tools.DirFlag> get_free_directions() {
 		EnumSet<Tools.DirFlag> res=EnumSet.copyOf(exits);
 		res.removeAll(limits);
 		return res;

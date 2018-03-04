@@ -27,7 +27,7 @@ public class Maze {
 		return cells[_c.x][_c.y];
 	}
 
-	public void carve_exit(Coords _c, Tools.DirFlag _dir) throws Exception {
+	public void carve_exit(Coords _c, Tools.DirFlag _dir) {
 		this.get_cell(_c.get_neighbour(_dir)).carve(Tools.opposite_direction(_dir));
 		this.get_cell(_c).carve(_dir);
 	}

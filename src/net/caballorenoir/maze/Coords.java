@@ -20,7 +20,7 @@ public class Coords {
 		y=_y;
 	}
 
-	public Coords get_neighbour(Tools.DirFlag _dir) throws Exception {
+	public Coords get_neighbour(Tools.DirFlag _dir) {
 		Coords res=new Coords(this);
 		res.move(_dir);
 		return res;
