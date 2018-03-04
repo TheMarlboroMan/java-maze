@@ -1,3 +1,5 @@
+package net.caballorenoir.maze;
+
 public class Coords {
 
 	public int x;

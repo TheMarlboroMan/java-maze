@@ -1,3 +1,5 @@
+package net.caballorenoir.maze;
+
 import java.util.EnumSet;
 
 public class Cell {

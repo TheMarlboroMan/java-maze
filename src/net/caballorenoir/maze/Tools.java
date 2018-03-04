@@ -1,3 +1,5 @@
+package net.caballorenoir.maze;
+
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.EnumSet;
 
