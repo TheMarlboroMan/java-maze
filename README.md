@@ -11,4 +11,4 @@ javac -cp src/ -d lib/ src/net/caballorenoir/maze/main.java
 
 # Run
 
-java -cp lib/ main WIDTH HEIGHT
+java -cp lib/ net.caballorenoir.maze.main WIDTH HEIGHT
