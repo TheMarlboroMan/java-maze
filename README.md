@@ -26,4 +26,5 @@ java -jar maze.jar
 
 # TODO:
 
+- Do the graphic part right, using multithreading.
 - Plug other generators.

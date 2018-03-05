@@ -19,6 +19,7 @@ public class Cell {
 		return limits.contains(_pos);
 	}
 
+	//TODO: This is... misleading.
 	public boolean is_open(Tools.DirFlag _pos) {
 		return exits.contains(_pos);
 	}
